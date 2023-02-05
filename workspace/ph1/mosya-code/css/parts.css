@@ -1,0 +1,416 @@
+body{
+  background:#ecf1e9;
+  font-family: 'Sawarabi Gothic', sans-serif;
+  color: #333;
+  font-size:1rem;
+  line-height:1.85; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; 
+  word-wrap: break-word;
+}
+header{
+  position: relative;
+}
+.rotateY{
+  text-align: center;
+}
+#g-nav-list{
+  margin-bottom: 60px;
+}
+
+/*---------------------------検索ボックス--------------------------------- */
+
+#search-text {
+  -webkit-appearance: none;
+  width: 50px;
+  height: 50px;
+  padding: 15px 15px;
+  border-radius: 10px;
+  border: none;
+  background: #888 url(../img/icon_search.svg) no-repeat 17px center;
+  background-size: 20px 20px;
+  transition: all 0.5s; /*transitionを使ってスムーズに伸ばす*/
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  position: absolute;
+  right: 40px;
+  top:0px;
+}
+#search-wrap {
+  position: absolute;/*絶対配置にして*/
+  z-index: 2;/*最前面に設定。数字は変更可*/
+  top:10px;
+  right:10px;
+}
+
+/*テキスト入力inputにフォーカスした時の形状*/
+#search-text:focus {
+width: 220px;/*テキスト入力エリアが伸びる後の横幅*/
+padding: 20px 0 20px 60px;
+}
+
+.openbtn{
+  display: none;
+}
+@media screen and (min-width:768px){
+  .g-nav-logow{
+    display: none;
+  }
+  .g-nav-ul{
+    width: 60%;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width:768px) {
+/*ボタン外側*/
+.openbtn{
+  display: block;
+  position:fixed;
+  top:10px;
+  left: 10px;
+  z-index: 999;/*ボタンを最前面に*/
+  cursor: pointer;
+  width: 50px;
+  height:50px;
+  background:#457703;
+  border-radius: 10px;
+}
+
+/*ボタン内側*/
+.openbtn span{
+  display: inline-block;
+  transition: all .4s;/*アニメーションの設定*/
+  position: absolute;
+  left: 14px;
+  height: 2px;
+  border-radius: 5px;
+  background: #fff;
+  width: 45%;
+  z-index: 933;
+}
+
+
+.openbtn span:nth-of-type(1) {
+top:13px;	
+}
+
+.openbtn span:nth-of-type(2) {
+top:19px;
+}
+
+.openbtn span:nth-of-type(3) {
+top:25px;
+}
+
+.openbtn span:nth-of-type(3)::after {
+  content:"Menu";/*3つ目の要素のafterにMenu表示を指定*/
+  position: absolute;
+  top:5px;
+  left:-2px;
+  color: #fff;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+.openbtn.active span:nth-of-type(1) {
+  top: 14px;
+  left: 18px;
+  transform: translateY(6px) rotate(-45deg);
+  width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+  top: 26px;
+  left: 18px;
+  transform: translateY(-6px) rotate(45deg);
+  width: 30%;
+}
+
+.openbtn.active span:nth-of-type(3)::after {
+  content:"Close";/*3つ目の要素のafterにClose表示を指定*/
+  transform: translateY(0) rotate(-45deg);
+  top:5px;
+  left:4px;
+}
+/*========= ナビゲーションのためのCSS ===============*/
+
+/*アクティブになったエリア*/
+#g-nav.panelactive{
+  /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+  position:fixed;
+  z-index: 932;
+  top: 0;
+  width:100%;
+  height: 100vh;
+  background-color: rgb(145, 185, 93);
+}
+
+/*丸の拡大*/
+.circle-bg{
+  position: fixed;
+  z-index:3;
+  /*丸の形*/
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #999;
+  /*丸のスタート位置と形状*/
+  transform: scale(0);/*scaleをはじめは0に*/
+  left:-50px;
+  top:-50px;
+  transition: all .6s;/*0.6秒かけてアニメーション*/
+}
+
+.circle-bg.circleactive{
+  transform: scale(50);/*クラスが付与されたらscaleを拡大*/
+}
+
+/*ナビゲーションの縦スクロール*/
+#g-nav-list{
+  display: none;/*はじめは表示なし*/
+  /*ナビの数が増えた場合縦スクロール*/
+  position: fixed;
+  z-index: 999; 
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#g-nav.panelactive #g-nav-list{
+   display: block; /*クラスが付与されたら出現*/
+}
+
+/*ナビゲーション*/
+#g-nav ul {
+  opacity: 0;/*はじめは透過0*/
+  /*ナビゲーション天地中央揃え※レイアウトによって調整してください。不必要なら削除*/
+  position: absolute;
+  z-index: 999;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+/*背景が出現後にナビゲーションを表示*/
+#g-nav.panelactive ul {
+  opacity:1;
+}
+
+/* 背景が出現後にナビゲーション li を表示※レイアウトによって調整してください。不必要なら削除*/
+#g-nav.panelactive ul li{
+  animation-name:gnaviAnime; /*下で定義*/
+  animation-duration:1s;
+  animation-delay:.2s;/*0.2 秒遅らせて出現*/
+  animation-fill-mode:forwards;
+  opacity:0;
+}
+
+@keyframes gnaviAnime{
+  0% {
+    opacity: 0; /*不透明度０*/
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/*リストのレイアウト設定*/
+#g-nav li{
+  text-align: center; 
+  list-style: none;
+}
+
+#g-nav li a{
+  color: #333;
+  text-decoration: none;
+  padding:10px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.g-nav-logow{
+  text-align: center;
+}
+}
+
+
+/*==================================================
+スライダーのためのcss
+===================================*/
+
+.slider {/*横幅94%で左右に余白を持たせて中央寄せ*/
+  width:94%;
+  margin:0 auto;
+}
+
+.slider img {
+  width:60vw;/*スライダー内の画像を60vwにしてレスポンシブ化*/
+  height:auto;
+}
+
+.slider .slick-slide {
+transform: scale(0.8);/*左右の画像のサイズを80%に*/
+transition: all .5s;/*拡大や透過のアニメーションを0.5秒で行う*/
+opacity: 0.5;/*透過50%*/
+}
+
+.slider .slick-slide.slick-center{
+transform: scale(1);/*中央の画像のサイズだけ等倍に*/
+opacity: 1;/*透過なし*/
+}
+
+
+/*矢印の設定*/
+
+/*戻る、次へ矢印の位置*/
+.slick-prev, 
+.slick-next {
+  position: absolute;/*絶対配置にする*/
+  top: 42%;
+  cursor: pointer;/*マウスカーソルを指マークに*/
+  outline: none;/*クリックをしたら出てくる枠線を消す*/
+  border-top: 2px solid #666;/*矢印の色*/
+  border-right: 2px solid #666;/*矢印の色*/
+  height: 15px;
+  width: 15px;
+}
+
+.slick-prev {/*戻る矢印の位置と形状*/
+  left: -1.5%;
+  transform: rotate(-135deg);
+}
+
+.slick-next {/*次へ矢印の位置と形状*/
+  right: -1.5%;
+  transform: rotate(45deg);
+}
+
+/*ドットナビゲーションの設定*/
+
+.slick-dots {
+  text-align:center;
+margin:20px 0 0 0;
+}
+
+.slick-dots li {
+  display:inline-block;
+margin:0 5px;
+}
+
+.slick-dots button {
+  color: transparent;
+  outline: none;
+  width:8px;/*ドットボタンのサイズ*/
+  height:8px;/*ドットボタンのサイズ*/
+  display:block;
+  border-radius:50%;
+  background:#ccc;/*ドットボタンの色*/
+}
+
+.slick-dots .slick-active button{
+  background:#333;/*ドットボタンの現在地表示の色*/
+}
+
+
+/*==================================================
+/*7 画像リンクの動き*/
+/*===================================*/
+
+/* 7-17　回転＋テキスト（Y 軸）
+   ----------------------------- */
+/* スマホ表示用。flipYを指定している親要素に指定しないとうまく動かない*/
+.choice-btn{
+  transform:translate3d(0, 0, 0);
+}
+
+.flipY a{/*テキストの基点となる位置を定義*/
+position: relative;
+display: block;
+}
+
+.flipY img {
+transition: all 0.35s;/*移り変わる速さを変更したい場合はこの数値を変更*/
+backface-visibility: hidden;/*三次元になった際に裏面を可視化させない*/
+}
+
+.flipY:hover img{/*hoverした時の変化*/
+transform: rotateY(-180deg);
+opacity: 0!important;
+}
+
+.flipY span.detail-cap {
+/*ここからエリアの絶対配置の指定*/
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+/*ここまでエリアの絶対配置の指定*/
+transition: all 0.35s ease;/*移り変わる速さを変更したい場合はこの数値を変更*/
+transform: rotateY(90deg);/*横軸に回転*/
+transform-origin: 50% 0%;/*回転する基点*/
+opacity: 0;
+background:#666;/*背景色*/
+color: #fff;/*テキストの色を変えたい場合はここを修正*/
+/*ここからテキスト中央寄せの指定*/
+display: flex;
+justify-content: center;
+align-items: center;
+/*ここまでテキスト中央寄せの指定*/
+}
+
+.flipY:hover span.detail-cap{/*hoverした時の変化*/
+transform: rotateY(0);/*横軸に回転*/
+opacity: 1;
+transition-delay: 0.15s;/*移り変わる速さを変更したい場合はこの数値を変更*/
+}
+
+/*　7-8　キラッ　*/
+
+.shine span.mask{
+position: relative;/*キラッの基点となる位置を定義*/
+  display: block;
+  overflow: hidden;
+}
+
+.shine span.mask::before {
+position: absolute;
+content: '';
+width: 50%;/*キラッの横幅*/
+height: 100%;/*キラッの縦幅*/
+top: 0;/*.shine span.maskのトップ0を基点*/
+left: -75%;/*画面の見えていない左から右へ移動するスタート地点*/
+background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+transform: skewX(-25deg);/*背景白透過を斜めに*/
+}
+
+.shine span.mask:hover::before {/*hoverした時の変化*/
+animation: shine 0.7s;/*アニメーションの名前と速度を定義*/
+}
+
+@keyframes shine {
+100% {
+  left: 125%;/*画面の見えていない左から右へ移動する終了地点*/
+}
+}
+
+.photo{
+  position: relative;
+  z-index:999999;
+
+
+}

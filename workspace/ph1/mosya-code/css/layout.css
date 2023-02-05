@@ -1,0 +1,74 @@
+/* ranking */
+
+/*画像の横幅を100%にしてレスポンシブ化*/
+#ranking img{
+	width: 100%;
+	height: auto;
+	vertical-align: bottom;/*画像の下にできる余白を削除*/
+}
+
+.ranking-list{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  counter-reset: number;
+}
+
+.ranking-list li {
+    position: relative;
+    z-index: 1;
+    width:30%;
+    margin:20px 0;
+    opacity: 0;
+}
+
+.ranking-list .ranking-cap{
+    margin:10px 0 0 0;
+    text-align: center;
+    display: block;
+}
+
+@media screen and (max-width:550px){
+.ranking-list li {
+    width: 46%;
+}
+    
+.ranking-list li:last-child{
+    display: none;
+    }    
+}
+
+.ranking-list li::before {
+      position: absolute;
+      left:-0.5em;
+      top:-0.5em;
+      z-index: 2;
+      counter-increment: number;
+      content: counter(number);
+      background: #457703;
+      display: inline-block;
+      width: 2.5em;
+      height:2.5em;
+      line-height:2.5em;
+      font-size:1.2rem;
+      text-align: center;
+      border-radius: 50%;
+      color: #fff;
+}
+
+@media screen and (max-width:768px){
+.ranking-list li::before {
+      width: 2em;
+      height:2em;
+      line-height:2em;
+      font-size:1.1rem;
+    }
+    
+}
+
+.ranking-list li:nth-child(1)::before {
+      background: #997F42; }
+.ranking-list li:nth-child(2)::before {
+      background: #777; }
+.ranking-list li:nth-child(3)::before {
+      background: #B25938; }
