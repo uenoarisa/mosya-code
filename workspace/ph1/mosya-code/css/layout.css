@@ -1,4 +1,28 @@
-/* ranking */
+*{
+    box-sizing: border-box;
+}
+a{
+	color: #333;
+	text-decoration: none;
+	outline: none;
+}
+
+.wrapper{
+    display: flex;
+    padding: 0 70px;
+}
+
+#main-area{
+    width: 70%;
+
+}
+
+#subarea{
+    width: 24%;
+}
+
+
+/*========ranking ===================================================*/
 
 /*画像の横幅を100%にしてレスポンシブ化*/
 #ranking img{
@@ -12,6 +36,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   counter-reset: number;
+  margin: 0;
 }
 
 .ranking-list li {
@@ -19,7 +44,7 @@
     z-index: 1;
     width:30%;
     margin:20px 0;
-    opacity: 0;
+    opacity: 1;
 }
 
 .ranking-list .ranking-cap{
@@ -35,7 +60,7 @@
     
 .ranking-list li:last-child{
     display: none;
-    }    
+}    
 }
 
 .ranking-list li::before {
@@ -72,3 +97,6 @@
       background: #777; }
 .ranking-list li:nth-child(3)::before {
       background: #B25938; }
+
+
+/*----------------------------------------------------------------------------*/

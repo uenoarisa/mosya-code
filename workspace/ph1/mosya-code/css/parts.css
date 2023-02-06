@@ -9,6 +9,13 @@ body{
   -webkit-text-size-adjust: 100%; 
   word-wrap: break-word;
 }
+ul{
+  text-decoration: none;
+}
+ol{
+  margin: 0;
+}
+
 header{
   position: relative;
 }
@@ -18,8 +25,19 @@ header{
 #g-nav-list{
   margin-bottom: 60px;
 }
+.sub-btn-list{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 30px 0;
+}
+.cap{
+  width: 48%;
+  background-color: #457703;
+  height: 100px;
+}
 
-/*---------------------------検索ボックス--------------------------------- */
+
+/*=================検索ボックス================================================*/
 
 #search-text {
   -webkit-appearance: none;
@@ -50,6 +68,8 @@ header{
 width: 220px;/*テキスト入力エリアが伸びる後の横幅*/
 padding: 20px 0 20px 60px;
 }
+
+/* =========================================================================*/
 
 .openbtn{
   display: none;
@@ -98,15 +118,15 @@ padding: 20px 0 20px 60px;
 
 
 .openbtn span:nth-of-type(1) {
-top:13px;	
+  top:13px;	
 }
 
 .openbtn span:nth-of-type(2) {
-top:19px;
+  top:19px;
 }
 
 .openbtn span:nth-of-type(3) {
-top:25px;
+  top:25px;
 }
 
 .openbtn span:nth-of-type(3)::after {
@@ -328,7 +348,7 @@ margin:0 5px;
 
 /*==================================================
 /*7 画像リンクの動き*/
-/*===================================*/
+/*=================================================================*/
 
 /* 7-17　回転＋テキスト（Y 軸）
    ----------------------------- */
@@ -353,24 +373,24 @@ opacity: 0!important;
 }
 
 .flipY span.detail-cap {
-/*ここからエリアの絶対配置の指定*/
-position: absolute;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
-/*ここまでエリアの絶対配置の指定*/
-transition: all 0.35s ease;/*移り変わる速さを変更したい場合はこの数値を変更*/
-transform: rotateY(90deg);/*横軸に回転*/
-transform-origin: 50% 0%;/*回転する基点*/
-opacity: 0;
-background:#666;/*背景色*/
-color: #fff;/*テキストの色を変えたい場合はここを修正*/
-/*ここからテキスト中央寄せの指定*/
-display: flex;
-justify-content: center;
-align-items: center;
-/*ここまでテキスト中央寄せの指定*/
+  /*ここからエリアの絶対配置の指定*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*ここまでエリアの絶対配置の指定*/
+  transition: all 0.35s ease;/*移り変わる速さを変更したい場合はこの数値を変更*/
+  transform: rotateY(90deg);/*横軸に回転*/
+  transform-origin: 50% 0%;/*回転する基点*/
+  opacity: 0;
+  background:#666;/*背景色*/
+  color: #fff;/*テキストの色を変えたい場合はここを修正*/
+  /*ここからテキスト中央寄せの指定*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*ここまでテキスト中央寄せの指定*/
 }
 
 .flipY:hover span.detail-cap{/*hoverした時の変化*/
@@ -407,10 +427,4 @@ animation: shine 0.7s;/*アニメーションの名前と速度を定義*/
   left: 125%;/*画面の見えていない左から右へ移動する終了地点*/
 }
 }
-
-.photo{
-  position: relative;
-  z-index:999999;
-
-
-}
+/*=================================================================================*/

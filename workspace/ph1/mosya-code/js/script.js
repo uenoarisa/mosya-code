@@ -1,6 +1,14 @@
+$(function(){
+  $(".openbtn").removeClass('active');
+  $("#g-nav").removeClass('panelactive');
+  $(".circle-bg").removeClass('circleactive');
+});
+
+
 /*===========================================================*/
 /*機能編 5-1-22 クリックしたら円形背景が拡大（左上から）*/
 /*===========================================================*/
+
 
 $(".openbtn").click(function () {//ボタンがクリックされたら
 	$(this).toggleClass('active');//ボタン自身に activeクラスを付与し
